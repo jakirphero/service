@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>সিলেট প্রিন্টিং ফরম - ২০২৬</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:
+    "Noto Sans Bengali",
+    "SolaimanLipi",
+    Arial,
+    sans-serif;
+    background:#eef3f8;
+    color:#17212b;
+}
+
+.container{
+    max-width:1500px;
+    margin:auto;
+    padding:16px;
+}
+
+.header{
+    background:#0b5d4b;
+    color:white;
+    border-radius:14px;
+    padding:18px 20px;
+    margin-bottom:16px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.header h1{
+    font-size:24px;
+}
+
+.header p{
+    margin-top:5px;
+    opacity:.9;
+}
+
+.header button{
+    border:0;
+    background:#f5c542;
+    color:#111;
+    padding:11px 17px;
+    border-radius:9px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:
+    repeat(5,1fr);
+    gap:12px;
+    margin-bottom:16px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:15px;
+    box-shadow:0 3px 12px #0000000d;
+    border-left:5px solid #0b5d4b;
+}
+
+.card small{
+    display:block;
+    color:#65727e;
+    margin-bottom:5px;
+}
+
+.card strong{
+    font-size:24px;
+}
+
+.toolbar{
+    background:white;
+    padding:14px;
+    border-radius:12px;
+
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+
+    margin-bottom:14px;
+
+    box-shadow:0 3px 12px #0000000d;
+}
+
+input,
+select{
+    border:1px solid #cbd5df;
+    border-radius:8px;
+    padding:10px 11px;
+    font-size:14px;
+    background:white;
+    outline:none;
+}
+
+input:focus,
+select:focus{
+    border-color:#0b5d4b;
+}
+
+.search{
+    flex:1;
+    min-width:220px;
+}
+
+.table-wrap{
+    background:white;
+    border-radius:12px;
+    overflow:auto;
+    box-shadow:0 3px 12px #0000000d;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1150px;
+}
+
+th,
+td{
+    border:1px solid #d7e0e7;
+    padding:9px 8px;
+    text-align:center;
+    font-size:13px;
+}
+
+thead tr:first-child th{
+    background:#b9dfe9;
+}
+
+thead tr:nth-child(2) th{
+    background:#d7edf2;
+}
+
+th{
+    font-weight:700;
+    white-space:nowrap;
+}
+
+tbody tr:nth-child(even){
+    background:#f7fafc;
+}
+
+tbody tr:hover{
+    background:#eef8f5;
+}
+
+.amount{
+    font-weight:700;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 8px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.done{
+    background:#d8f4df;
+    color:#18753b;
+}
+
+.pending{
+    background:#ffe1e1;
+    color:#a52222;
+}
+
+.partial{
+    background:#fff0c7;
+    color:#8a6100;
+}
+
+.actions{
+    display:flex;
+    gap:5px;
+    justify-content:center;
+}
+
+.btn{
+    border:0;
+    border-radius:6px;
+    padding:6px 9px;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.edit{
+    background:#dcecff;
+    color:#17558f;
+}
+
+.view{
+    background:#e6e6e6;
+    color:#333;
+}
+
+.modal-bg{
+    display:none;
+
+    position:fixed;
+    inset:0;
+
+    background:#0008;
+
+    z-index:20;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:15px;
+}
+
+.modal{
+    background:white;
+
+    width:min(650px,100%);
+
+    max-height:92vh;
+
+    overflow:auto;
+
+    border-radius:14px;
+
+    padding:20px;
+}
+
+.modal h2{
+    margin-bottom:14px;
+}
+
+.grid{
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:11px;
+}
+
+.field label{
+    display:block;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    margin-bottom:5px;
+}
+
+.field input,
+.field select{
+    width:100%;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+.modal-actions{
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:8px;
+
+    margin-top:16px;
+}
+
+.cancel{
+    background:#e9edf1;
+
+    border:0;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+.save{
+    background:#0b5d4b;
+
+    color:white;
+
+    border:0;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+.empty{
+    text-align:center;
+
+    padding:30px;
+
+    color:#6c7781;
+}
+
+.footer{
+    text-align:center;
+
+    padding:18px;
+
+    color:#687580;
+
+    font-size:13px;
+}
+
+@media(max-width:900px){
+
+    .stats{
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:550px){
+
+    .container{
+        padding:9px;
+    }
+
+    .header h1{
+        font-size:19px;
+    }
+
+    .stats{
+        grid-template-columns:
+        1fr 1fr;
+    }
+
+    .card strong{
+        font-size:20px;
+    }
+
+    .grid{
+        grid-template-columns:
+        1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<div>
+
+<h1>
+সিলেট প্রিন্টিং ফরম - ২০২৬
+</h1>
+
+<p>
+বাংলাদেশের ৬৪ জেলার ফরম জমা ও টাকা সংগ্রহ ব্যবস্থাপনা
+</p>
+
+</div>
+
+<button onclick="openModal()">
+＋ জেলা যোগ / আপডেট
+</button>
+
+</div>
+
+
+<div class="stats">
+
+<div class="card">
+
+<small>
+মোট জেলা
+</small>
+
+<strong id="totalDistricts">
+64
+</strong>
+
+</div>
+
+
+<div class="card">
+
+<small>
+ফরম জমা হয়েছে
+</small>
+
+<strong id="submitted">
+0
+</strong>
+
+</div>
+
+
+<div class="card">
+
+<small>
+ফরম এখনো হয়নি
+</small>
+
+<strong id="pending">
+64
+</strong>
+
+</div>
+
+
+<div class="card">
+
+<small>
+মোট জমা টাকা
+</small>
+
+<strong id="totalMoney">
+৳ ০
+</strong>
+
+</div>
+
+
+<div class="card">
+
+<small>
+মোট ফরম
+</small>
+
+<strong id="totalForms">
+0
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="toolbar">
+
+<input
+id="search"
+class="search"
+type="text"
+placeholder="জেলার নাম দিয়ে খুঁজুন..."
+oninput="render()"
+>
+
+
+<select
+id="divisionFilter"
+onchange="render()"
+>
+
+<option value="">
+সব বিভাগ
+</option>
+
+</select>
+
+
+<select
+id="statusFilter"
+onchange="render()"
+>
+
+<option value="">
+সব অবস্থা
+</option>
+
+<option value="done">
+সম্পূর্ণ জমা
+</option>
+
+<option value="partial">
+আংশিক জমা
+</option>
+
+<option value="pending">
+জমা হয়নি
+</option>
+
+</select>
+
+
+<button
+class="btn view"
+onclick="resetData()"
+>
+ডাটা রিসেট
+</button>
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th rowspan="2">
+ক্রমিক
+</th>
+
+<th rowspan="2">
+বিভাগ
+</th>
+
+<th rowspan="2">
+জেলার নাম
+</th>
+
+<th colspan="4">
+১ম ফরম
+</th>
+
+<th colspan="4">
+২য় ফরম
+</th>
+
+<th colspan="3">
+মোট
+</th>
+
+<th rowspan="2">
+অবস্থা
+</th>
+
+<th rowspan="2">
+মন্তব্য
+</th>
+
+<th rowspan="2">
+Action
+</th>
+
+</tr>
+
+
+<tr>
+
+<th>
+চাহিদা
+</th>
+
+<th>
+জমা
+</th>
+
+<th>
+বাকি
+</th>
+
+<th>
+টাকা
+</th>
+
+
+<th>
+চাহিদা
+</th>
+
+<th>
+জমা
+</th>
+
+<th>
+বাকি
+</th>
+
+<th>
+টাকা
+</th>
+
+
+<th>
+ফরম
+</th>
+
+<th>
+বাকি
+</th>
+
+<th>
+মোট টাকা
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="tbody">
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<div class="footer">
+
+ডাটা বর্তমানে এই ব্রাউজারের Local Storage-এ সংরক্ষিত হচ্ছে।
+
+</div>
+
+</div>
+
+
+
+<div
+class="modal-bg"
+id="modalBg"
+>
+
+<div class="modal">
+
+<h2 id="modalTitle">
+জেলার তথ্য যোগ / আপডেট
+</h2>
+
+
+<form id="districtForm">
+
+<input
+type="hidden"
+id="editIndex"
+>
+
+
+<div class="grid">
+
+
+<div class="field full">
+
+<label>
+জেলা
+</label>
+
+<select
+id="district"
+required
+>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+১ম ফরম চাহিদা
+</label>
+
+<input
+id="f1Demand"
+type="number"
+min="0"
+value="0"
+required
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+১ম ফরম জমা
+</label>
+
+<input
+id="f1Submitted"
+type="number"
+min="0"
+value="0"
+required
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+১ম ফরমের টাকা
+</label>
+
+<input
+id="f1Money"
+type="number"
+min="0"
+value="0"
+required
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+২য় ফরম চাহিদা
+</label>
+
+<input
+id="f2Demand"
+type="number"
+min="0"
+value="0"
+required
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+২য় ফরম জমা
+</label>
+
+<input
+id="f2Submitted"
+type="number"
+min="0"
+value="0"
+required
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+২য় ফরমের টাকা
+</label>
+
+<input
+id="f2Money"
+type="number"
+min="0"
+value="0"
+required
+>
+
+</div>
+
+
+<div class="field full">
+
+<label>
+মন্তব্য
+</label>
+
+<input
+id="note"
+type="text"
+placeholder="যেমন: টাকা ব্যাংকে জমা হয়েছে"
+>
+
+</div>
+
+</div>
+
+
+<div class="modal-actions">
+
+<button
+type="button"
+class="cancel"
+onclick="closeModal()"
+>
+বাতিল
+</button>
+
+
+<button
+type="submit"
+class="save"
+>
+সংরক্ষণ করুন
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+const districts = [
+
+["বরিশাল","বরগুনা"],
+["বরিশাল","বরিশাল"],
+["বরিশাল","ভোলা"],
+["বরিশাল","ঝালকাঠি"],
+["বরিশাল","পটুয়াখালী"],
+["বরিশাল","পিরোজপুর"],
+
+
+["চট্টগ্রাম","বান্দরবান"],
+["চট্টগ্রাম","ব্রাহ্মণবাড়িয়া"],
+["চট্টগ্রাম","চাঁদপুর"],
+["চট্টগ্রাম","চট্টগ্রাম"],
+["চট্টগ্রাম","কুমিল্লা"],
+["চট্টগ্রাম","কক্সবাজার"],
+["চট্টগ্রাম","ফেনী"],
+["চট্টগ্রাম","খাগড়াছড়ি"],
+["চট্টগ্রাম","লক্ষ্মীপুর"],
+["চট্টগ্রাম","নোয়াখালী"],
+["চট্টগ্রাম","রাঙ্গামাটি"],
+
+
+["ঢাকা","ঢাকা"],
+["ঢাকা","ফরিদপুর"],
+["ঢাকা","গাজীপুর"],
+["ঢাকা","গোপালগঞ্জ"],
+["ঢাকা","কিশোরগঞ্জ"],
+["ঢাকা","মাদারীপুর"],
+["ঢাকা","মানিকগঞ্জ"],
+["ঢাকা","মুন্সীগঞ্জ"],
+["ঢাকা","নারায়ণগঞ্জ"],
+["ঢাকা","নরসিংদী"],
+["ঢাকা","রাজবাড়ী"],
+["ঢাকা","শরীয়তপুর"],
+["ঢাকা","টাঙ্গাইল"],
+
+
+["খুলনা","বাগেরহাট"],
+["খুলনা","চুয়াডাঙ্গা"],
+["খুলনা","যশোর"],
+["খুলনা","ঝিনাইদহ"],
+["খুলনা","খুলনা"],
+["খুলনা","কুষ্টিয়া"],
+["খুলনা","মাগুরা"],
+["খুলনা","মেহেরপুর"],
+["খুলনা","নড়াইল"],
+["খুলনা","সাতক্ষীরা"],
+
+
+["ময়মনসিংহ","জামালপুর"],
+["ময়মনসিংহ","ময়মনসিংহ"],
+["ময়মনসিংহ","নেত্রকোণা"],
+["ময়মনসিংহ","শেরপুর"],
+
+
+["রাজশাহী","বগুড়া"],
+["রাজশাহী","জয়পুরহাট"],
+["রাজশাহী","নওগাঁ"],
+["রাজশাহী","নাটোর"],
+["রাজশাহী","চাঁপাইনবাবগঞ্জ"],
+["রাজশাহী","পাবনা"],
+["রাজশাহী","রাজশাহী"],
+["রাজশাহী","সিরাজগঞ্জ"],
+
+
+["রংপুর","দিনাজপুর"],
+["রংপুর","গাইবান্ধা"],
+["রংপুর","কুড়িগ্রাম"],
+["রংপুর","লালমনিরহাট"],
+["রংপুর","নীলফামারী"],
+["রংপুর","পঞ্চগড়"],
+["রংপুর","রংপুর"],
+["রংপুর","ঠাকুরগাঁও"],
+
+
+["সিলেট","হবিগঞ্জ"],
+["সিলেট","মৌলভীবাজার"],
+["সিলেট","সুনামগঞ্জ"],
+["সিলেট","সিলেট"]
+
+];
+
+
+const storageKey =
+"district_form_data_v1";
+
+
+let data =
+JSON.parse(
+localStorage.getItem(storageKey)
+|| "null"
+);
+
+
+if(!data){
+
+data =
+districts.map(
+([division,name]) => ({
+
+division,
+name,
+
+f1Demand:0,
+f1Submitted:0,
+f1Money:0,
+
+f2Demand:0,
+f2Submitted:0,
+f2Money:0,
+
+note:""
+
+})
+);
+
+localStorage.setItem(
+storageKey,
+JSON.stringify(data)
+);
+
+}
+
+
+function money(n){
+
+return "৳ " +
+Number(n || 0)
+.toLocaleString("bn-BD");
+
+}
+
+
+function num(n){
+
+return Number(n || 0)
+.toLocaleString("bn-BD");
+
+}
+
+
+function populateFilters(){
+
+const divisions =
+[
+...new Set(
+districts.map(x=>x[0])
+)
+];
+
+
+const divisionFilter =
+document.getElementById(
+"divisionFilter"
+);
+
+
+divisions.forEach(
+division=>{
+
+const option =
+document.createElement("option");
+
+option.value =
+division;
+
+option.textContent =
+division;
+
+divisionFilter.appendChild(
+option
+);
+
+});
+
+
+const districtSelect =
+document.getElementById(
+"district"
+);
+
+
+districts.forEach(
+([division,name])=>{
+
+const option =
+document.createElement("option");
+
+option.value =
+name;
+
+option.textContent =
+name +
+" — " +
+division;
+
+districtSelect.appendChild(
+option
+);
+
+});
+
+}
+
+
+populateFilters();
+
+
+
+function statusOf(x){
+
+const demand =
+x.f1Demand +
+x.f2Demand;
+
+const submitted =
+x.f1Submitted +
+x.f2Submitted;
+
+
+if(submitted === 0){
+
+return [
+"pending",
+"জমা হয়নি"
+];
+
+}
+
+
+if(
+demand > 0 &&
+submitted >= demand
+){
+
+return [
+"done",
+"সম্পূর্ণ জমা"
+];
+
+}
+
+
+return [
+"partial",
+"আংশিক জমা"
+];
+
+}
+
+
+
+function render(){
+
+const search =
+document.getElementById(
+"search"
+).value.trim();
+
+
+const division =
+document.getElementById(
+"divisionFilter"
+).value;
+
+
+const status =
+document.getElementById(
+"statusFilter"
+).value;
+
+
+const tbody =
+document.getElementById(
+"tbody"
+);
+
+
+tbody.innerHTML = "";
+
+
+let visible = 0;
+
+
+data.forEach(
+(x,index)=>{
+
+const [
+statusClass,
+statusText
+] =
+statusOf(x);
+
+
+if(
+search &&
+!x.name.includes(search)
+){
+
+return;
+
+}
+
+
+if(
+division &&
+x.division !== division
+){
+
+return;
+
+}
+
+
+if(
+status &&
+statusClass !== status
+){
+
+return;
+
+}
+
+
+visible++;
+
+
+const f1Left =
+Math.max(
+0,
+x.f1Demand -
+x.f1Submitted
+);
+
+
+const f2Left =
+Math.max(
+0,
+x.f2Demand -
+x.f2Submitted
+);
+
+
+const totalForms =
+x.f1Submitted +
+x.f2Submitted;
+
+
+const totalLeft =
+f1Left +
+f2Left;
+
+
+const totalMoney =
+x.f1Money +
+x.f2Money;
+
+
+const tr =
+document.createElement("tr");
+
+
+tr.innerHTML = `
+
+<td>
+${num(index+1)}
+</td>
+
+<td>
+${x.division}
+</td>
+
+<td>
+<b>${x.name}</b>
+</td>
+
+
+<td>
+${num(x.f1Demand)}
+</td>
+
+<td>
+${num(x.f1Submitted)}
+</td>
+
+<td>
+${num(f1Left)}
+</td>
+
+<td class="amount">
+${money(x.f1Money)}
+</td>
+
+
+<td>
+${num(x.f2Demand)}
+</td>
+
+<td>
+${num(x.f2Submitted)}
+</td>
+
+<td>
+${num(f2Left)}
+</td>
+
+<td class="amount">
+${money(x.f2Money)}
+</td>
+
+
+<td>
+<b>${num(totalForms)}</b>
+</td>
+
+<td>
+${num(totalLeft)}
+</td>
+
+<td class="amount">
+${money(totalMoney)}
+</td>
+
+
+<td>
+
+<span
+class="status ${statusClass}"
+>
+
+${statusText}
+
+</span>
+
+</td>
+
+
+<td>
+${x.note || "—"}
+</td>
+
+
+<td>
+
+<div class="actions">
+
+<button
+class="btn edit"
+onclick="editRow(${index})"
+>
+এডিট
+</button>
+
+
+<button
+class="btn view"
+onclick="viewRow(${index})"
+>
+দেখুন
+</button>
+
+</div>
+
+</td>
+
+`;
+
+
+tbody.appendChild(tr);
+
+});
+
+
+if(visible === 0){
+
+tbody.innerHTML = `
+
+<tr>
+
+<td
+colspan="17"
+class="empty"
+>
+
+কোনো জেলা পাওয়া যায়নি
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+
+updateStats();
+
+}
+
+
+
+function updateStats(){
+
+const submitted =
+data.filter(
+x =>
+x.f1Submitted +
+x.f2Submitted
+> 0
+).length;
+
+
+const pending =
+data.filter(
+x =>
+x.f1Submitted +
+x.f2Submitted
+=== 0
+).length;
+
+
+const totalMoney =
+data.reduce(
+(sum,x)=>
+sum +
+x.f1Money +
+x.f2Money,
+0
+);
+
+
+const totalForms =
+data.reduce(
+(sum,x)=>
+sum +
+x.f1Submitted +
+x.f2Submitted,
+0
+);
+
+
+document.getElementById(
+"totalDistricts"
+).textContent =
+num(data.length);
+
+
+document.getElementById(
+"submitted"
+).textContent =
+num(submitted);
+
+
+document.getElementById(
+"pending"
+).textContent =
+num(pending);
+
+
+document.getElementById(
+"totalMoney"
+).textContent =
+money(totalMoney);
+
+
+document.getElementById(
+"totalForms"
+).textContent =
+num(totalForms);
+
+}
+
+
+
+function save(){
+
+localStorage.setItem(
+storageKey,
+JSON.stringify(data)
+);
+
+render();
+
+}
+
+
+
+function openModal(index=null){
+
+document.getElementById(
+"modalBg"
+).style.display =
+"flex";
+
+
+document.getElementById(
+"editIndex"
+).value =
+index === null
+? ""
+: index;
+
+
+document.getElementById(
+"modalTitle"
+).textContent =
+index === null
+? "জেলার তথ্য যোগ / আপডেট"
+: "জেলার তথ্য এডিট";
+
+
+if(index !== null){
+
+const x =
+data[index];
+
+
+document.getElementById(
+"district"
+).value =
+x.name;
+
+
+document.getElementById(
+"district"
+).disabled =
+true;
+
+
+document.getElementById(
+"f1Demand"
+).value =
+x.f1Demand;
+
+
+document.getElementById(
+"f1Submitted"
+).value =
+x.f1Submitted;
+
+
+document.getElementById(
+"f1Money"
+).value =
+x.f1Money;
+
+
+document.getElementById(
+"f2Demand"
+).value =
+x.f2Demand;
+
+
+document.getElementById(
+"f2Submitted"
+).value =
+x.f2Submitted;
+
+
+document.getElementById(
+"f2Money"
+).value =
+x.f2Money;
+
+
+document.getElementById(
+"note"
+).value =
+x.note || "";
+
+}else{
+
+
+document.getElementById(
+"district"
+).disabled =
+false;
+
+
+document.getElementById(
+"district"
+).value =
+districts[0][1];
+
+
+[
+"f1Demand",
+"f1Submitted",
+"f1Money",
+"f2Demand",
+"f2Submitted",
+"f2Money"
+]
+.forEach(
+id =>
+document.getElementById(
+id
+).value = 0
+);
+
+
+document.getElementById(
+"note"
+).value =
+"";
+
+}
+
+}
+
+
+
+function closeModal(){
+
+document.getElementById(
+"modalBg"
+).style.display =
+"none";
+
+}
+
+
+
+document.getElementById(
+"districtForm"
+).addEventListener(
+"submit",
+function(event){
+
+event.preventDefault();
+
+
+const index =
+document.getElementById(
+"editIndex"
+).value;
+
+
+const districtName =
+document.getElementById(
+"district"
+).value;
+
+
+const existing =
+data.find(
+x =>
+x.name === districtName
+);
+
+
+const item = {
+
+division:
+existing.division,
+
+name:
+districtName,
+
+f1Demand:
+Number(
+document.getElementById(
+"f1Demand"
+).value
+) || 0,
+
+f1Submitted:
+Number(
+document.getElementById(
+"f1Submitted"
+).value
+) || 0,
+
+f1Money:
+Number(
+document.getElementById(
+"f1Money"
+).value
+) || 0,
+
+f2Demand:
+Number(
+document.getElementById(
+"f2Demand"
+).value
+) || 0,
+
+f2Submitted:
+Number(
+document.getElementById(
+"f2Submitted"
+).value
+) || 0,
+
+f2Money:
+Number(
+document.getElementById(
+"f2Money"
+).value
+) || 0,
+
+note:
+document.getElementById(
+"note"
+).value.trim()
+
+};
+
+
+if(index === ""){
+
+const position =
+data.findIndex(
+x =>
+x.name === districtName
+);
+
+
+if(position >= 0){
+
+data[position] =
+item;
+
+}
+
+}else{
+
+data[Number(index)] =
+item;
+
+}
+
+
+save();
+
+closeModal();
+
+}
+
+);
+
+
+
+function editRow(index){
+
+openModal(index);
+
+}
+
+
+
+function viewRow(index){
+
+const x =
+data[index];
+
+
+const totalMoney =
+x.f1Money +
+x.f2Money;
+
+
+alert(
+
+"জেলা: " +
+x.name +
+
+"\nবিভাগ: " +
+x.division +
+
+"\n\n১ম ফরম: " +
+x.f1Submitted +
+" / " +
+x.f1Demand +
+
+"\n১ম ফরমের টাকা: " +
+money(x.f1Money) +
+
+"\n\n২য় ফরম: " +
+x.f2Submitted +
+" / " +
+x.f2Demand +
+
+"\n২য় ফরমের টাকা: " +
+money(x.f2Money) +
+
+"\n\nমোট ফরম: " +
+(
+x.f1Submitted +
+x.f2Submitted
+) +
+
+"\nমোট টাকা: " +
+money(totalMoney) +
+
+"\n\nমন্তব্য: " +
+(
+x.note ||
+"নেই"
+)
+
+);
+
+}
+
+
+
+function resetData(){
+
+const confirmReset =
+confirm(
+"সব জেলার ডাটা ০ করে দিতে চান?"
+);
+
+
+if(!confirmReset){
+
+return;
+
+}
+
+
+data =
+districts.map(
+([division,name]) => ({
+
+division,
+name,
+
+f1Demand:0,
+f1Submitted:0,
+f1Money:0,
+
+f2Demand:0,
+f2Submitted:0,
+f2Money:0,
+
+note:""
+
+})
+);
+
+
+save();
+
+}
+
+
+
+render();
+
+</script>
+
+</body>
+</html>
